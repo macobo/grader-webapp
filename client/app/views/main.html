@@ -1,9 +1,11 @@
-<div class="hero-unit">
-  <h1>'Allo, 'Allo!</h1>
-  <p>You now have</p>
-  <ul>
-      <li ng-repeat="thing in awesomeThings">{{thing}}</li>
-  </ul>
-  <p>installed.</p>
-  <h3>Enjoy coding! - Yeoman</h3>
+<div class="row">
+  <div class="span8">
+    <div file-uploader></div>
+  </div>
+  <div class="span4">
+    <select data-ng-model="selectedTask"
+            data-ng-options="task.name group by 'Peatükk '+task.unit for task in tasks">     
+      <option value="" disabled selected>Vali ülesanne</option>           
+    </select>
+  </div>
 </div>
