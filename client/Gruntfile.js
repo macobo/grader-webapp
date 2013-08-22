@@ -12,7 +12,7 @@ module.exports = function (grunt) {
   // configurable paths
   var yeomanConfig = {
     root: '..',
-    app:  'app',
+    app:  './app',
     dist: '../server/static'
   };
 
@@ -26,10 +26,6 @@ module.exports = function (grunt) {
       compass: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
         tasks: ['compass']
-      },
-      preprocess: {
-        files: ['<%= yeoman.app %>/{,*/}*.html'],
-        tasks: ['preprocess:dev', 'livereload']
       },
       livereload: {
         files: [
@@ -141,16 +137,6 @@ module.exports = function (grunt) {
         }
       }
     },
-    // The different constants name that will be use to build our html files.
-    // Example: <!-- @if GT_NODE_ENV == 'DEVELOPMENT' -->
-    env: {
-      dev: {
-        GT_NODE_ENV: 'DEVELOPMENT'
-      },
-      prod : {
-        GT_NODE_ENV: 'PRODUCTION'
-      }
-    },
     concat: {
       dist: {
         files: {
@@ -169,25 +155,9 @@ module.exports = function (grunt) {
         dest: '<%= yeoman.dist %>'
       }
     },
-    // Preprocess HTML files, taking out and placing different blocks
-    // depending on whether we're currently building for production
-    // or development
-    preprocess: {
-      dev: {
-        src: '<%= yeoman.app %>/tuner.html',
-        dest: '.tmp/tuner.html'
-      },
-      prod: {
-        src: '<%= yeoman.dist %>/tuner.html',
-        options: {
-          inline: true
-        }
-      }
-    },
     usemin: {
       html: ['<%= yeoman.dist %>/{,*/}*.html'],
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
-      etc: ['<%= yeoman.dist %>/articles.json'],
       options: {
         dirs: ['<%= yeoman.dist %>']
       }
@@ -253,6 +223,7 @@ module.exports = function (grunt) {
       dist: {
         options: { mangle: false },
         files: {
+          /*
           '<%= yeoman.dist %>/scripts/core.js': [
             '<%= yeoman.dist %>/scripts/core.js'
           ],
@@ -262,6 +233,7 @@ module.exports = function (grunt) {
           '<%= yeoman.dist %>/scripts/tuner.js': [
             '<%= yeoman.dist %>/scripts/tuner.js'
           ]
+          */
         }
       }
     },
@@ -322,10 +294,8 @@ module.exports = function (grunt) {
 
   // Development server with live reload
   grunt.registerTask('server', [
-    'env:dev',
     'clean:server',
     'compass:server',
-    'preprocess:dev',
     'configureProxies',
     'livereload-start',
     'connect:livereload',
@@ -336,7 +306,6 @@ module.exports = function (grunt) {
 
   // Build production server files
   grunt.registerTask('build', [
-    'env:prod',
     'clean:dist',
 //    'jshint',
     'test',
@@ -347,7 +316,6 @@ module.exports = function (grunt) {
     'htmlmin',
     'concat',
     'copy',
-    'preprocess:prod',
     'cdnify',
     'ngmin',
     'uglify',
@@ -357,7 +325,5 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', ['build']);
   grunt.loadNpmTasks('grunt-connect-proxy');
-  grunt.loadNpmTasks('grunt-env');
-  grunt.loadNpmTasks('grunt-preprocess');
   grunt.loadNpmTasks('grunt-ngmin');
 };
