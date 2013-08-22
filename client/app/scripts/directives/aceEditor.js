@@ -12,7 +12,7 @@ angular.module('graderApp')
       link: function postLink(scope, element, attrs) {
         element.text(element.text().trim());
         var editor = ace.edit('editor');
-        editor.setTheme('ace/theme/monokai');
+        editor.setTheme('ace/theme/xcode');
         editor.getSession().setMode('ace/mode/'+attrs.language);
         editor.getSession().setUseWrapMode(true);
         scope.model = editor.getValue();

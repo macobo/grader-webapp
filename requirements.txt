@@ -1,7 +1,2 @@
 Flask
-flask-uploads
 Jinja2
-numpy
-scipy
-jsonrpclib
-selenium

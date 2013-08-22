@@ -1,8 +1,7 @@
 import os.path
-import sys
 import config
 
-from flask import Flask, request
+from flask import Flask, request, jsonify
 app = Flask(__name__, static_folder='static', static_url_path='')
 
 if not app.debug:
@@ -20,3 +19,10 @@ if not app.debug:
 @app.route('/')
 def root():
     return app.send_static_file('index.html')
+
+
+@app.route('/api/grade_solution', methods=['POST'])
+def test_solution():
+    data = request.json
+    app.logger.debug(data)
+    return jsonify(data)

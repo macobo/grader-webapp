@@ -10,5 +10,21 @@ angular.module('graderApp')
       { name: 'Tagurpidi', unit: 12}
     ];
 
-    
+    $scope.postSolution = function() {
+      if ($scope.code && $scope.selectedTask) {
+        var data = {
+          code: $scope.code,
+          task: $scope.selectedTask
+        };
+        $http({
+          url: '/api/grade_solution',
+          method: 'POST',
+          data: data,
+        }).success(function () {
+          console.debug('success, ', arguments);
+        }).error(function (data, status, headers, config) {
+          console.debug('failure, ', arguments);
+        });
+      }
+    };
   });
