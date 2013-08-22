@@ -10,23 +10,7 @@
 }
 
 /* line 11, ../main.sass */
-#drop {
-  background-color: white;
-  padding: 20px 0;
-  border: 2px dashed #dddddd;
-  border-radius: 3px;
-  text-align: center;
-  font-size: 16px;
-  font-weight: bold;
-  color: #dddddd;
-}
-/* line 20, ../main.sass */
-#drop:hover, #drop.active {
-  border: 2px dashed #0088cc;
-  color: #0088cc;
-}
-/* line 23, ../main.sass */
-#drop a {
+.uploadbutton {
   background-color: #007a96;
   padding: 12px 26px;
   color: white;
@@ -34,14 +18,44 @@
   border-radius: 2px;
   cursor: pointer;
   display: inline-block;
-  margin-top: 12px;
+  margin-top: 10px;
   line-height: 1;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
 }
-/* line 33, ../main.sass */
-#drop a:hover {
+/* line 24, ../main.sass */
+.uploadbutton:hover {
   background-color: #0986a3;
+  color: white;
 }
-/* line 35, ../main.sass */
-#drop input {
+
+/* line 28, ../main.sass */
+.drop {
+  background-color: white;
+  padding: 25px 0;
+  border: 2px dashed #dddddd;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #dddddd;
+}
+/* line 37, ../main.sass */
+.drop p {
+  color: #0088cc;
+}
+/* line 39, ../main.sass */
+.drop:hover, .drop.active {
+  border: 2px dashed #0088cc;
+  color: #0088cc;
+}
+/* line 42, ../main.sass */
+.drop input {
   display: none;
+}
+
+/* line 45, ../main.sass */
+select {
+  width: 100%;
 }

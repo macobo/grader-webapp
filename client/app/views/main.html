@@ -1,11 +1,15 @@
 <div class="row">
-  <div class="span8">
-    <div file-uploader></div>
-  </div>
-  <div class="span4">
-    <select data-ng-model="selectedTask"
-            data-ng-options="task.name group by 'Peatükk '+task.unit for task in tasks">     
-      <option value="" disabled selected>Vali ülesanne</option>           
-    </select>
+  <div class="span12">
+    <div file-uploader>
+      <select data-ng-model="selectedTask"
+        data-ng-options="task.name group by 'Peatükk '+task.unit for task in tasks">
+        <option value="" disabled selected style="display:none">
+          Vali ülesanne
+        </option>           
+      </select>
+      <a class="uploadbutton">
+        Saa tagasiside
+      </a>
+    </div>
   </div>
 </div>
