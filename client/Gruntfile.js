@@ -263,7 +263,8 @@ module.exports = function (grunt) {
             '*.{ico,txt,swf,json}',
             '.htaccess',
             'images/{,*/}*.{gif,webp}',
-            'styles/fonts/*'
+            'styles/fonts/*',
+            'components/ace-builds/src-min-noconflict/**/*.*'
           ]
         }]
       }
