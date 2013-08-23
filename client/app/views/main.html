@@ -12,6 +12,11 @@ print("Hello world")
     <a class="uploadbutton pull-right" ng-click="postSolution()">
       Saa tagasiside
     </a>
-  </div>
 
+    <ul ng-show="feedback">
+      <li ng-repeat="result in feedback">
+        {{ result | json }}
+      </li>
+    </ul>
+  </div>
 </div>

@@ -16,12 +16,14 @@ angular.module('graderApp')
           code: $scope.code,
           task: $scope.selectedTask
         };
+        $scope.feedback = [];
         $http({
           url: '/api/grade_solution',
           method: 'POST',
           data: data,
-        }).success(function () {
-          console.debug('success, ', arguments);
+        }).success(function (answer) {
+          console.log(answer, arguments);
+          $scope.feedback = answer.results;
         }).error(function (data, status, headers, config) {
           console.debug('failure, ', arguments);
         });
