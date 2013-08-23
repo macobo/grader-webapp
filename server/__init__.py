@@ -1,12 +1,14 @@
 import os.path
 import config
-import grader
 import json
 import subprocess
 from grader.utils import tempModule
 
+from werkzeug.contrib.fixers import ProxyFix
+
 from flask import Flask, request, jsonify
 app = Flask(__name__, static_folder='static', static_url_path='')
+app.wsgi_app = ProxyFix(app.wsgi_app) # for gunicorn
 
 if not app.debug:
     import logging
