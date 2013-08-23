@@ -30,4 +30,10 @@ angular.module('graderApp')
         });
       }
     };
+
+    $scope.background = function(success) {
+      console.log(success);
+      return success ? 'alert-success' : 'alert-error';
+    };
+
   });

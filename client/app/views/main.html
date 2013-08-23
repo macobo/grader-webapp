@@ -12,11 +12,20 @@ print("Hello world")
     <a class="uploadbutton pull-right" ng-click="postSolution()">
       Saa tagasiside
     </a>
-
-    <ul ng-show="feedback" class="feedback container">
-      <li ng-repeat="result in feedback">
-        {{ result | json }}
-      </li>
-    </ul>
+    <div class="feedback container" ng-show="feedback">
+      <hr>
+      <h2>Tagasiside</h2>
+      <accordion>
+        <accordion-group ng-repeat="result in feedback">
+          <accordion-heading class="alert-success">
+            <i class="icon-ok check-mark" ng-show="result.success"></i>
+            {{ result.description }} 
+            <span class="pull-right"><i class="icon-time"></i> {{ result.time }}s</span>
+          </accordion-heading>
+          <p ng-show="result.success">Tubli töö!</p>
+          <pre ng-hide="result.success">{{ result.trace }}</pre>
+        </accordion-group>
+      </accordion>
+    </div>
   </div>
 </div>

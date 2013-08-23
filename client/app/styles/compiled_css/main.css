@@ -59,3 +59,8 @@
 .drop input {
   display: none;
 }
+
+/* line 49, ../main.sass */
+.feedback .icon-ok {
+  color: #468847;
+}
