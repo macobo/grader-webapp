@@ -1,16 +1,9 @@
-/*----------------------------
- *    The file upload form
- *-----------------------------
- */
+@import "compass/css3/border-radius"
 
 .ace-editor
   height: 20em
   margin-top: 20px
 
-#file-upload
-  border-radius: 5px
-  margin: 0 auto
-  width: 100%
 
 .uploadbutton
   background-color: #007a96
@@ -28,23 +21,9 @@
     background-color: #0986a3
     color: white
 
-.drop
-  background-color: #fff
-  padding: 25px 0
-  border: 2px dashed #ddd
-  border-radius: 3px
-  text-align: center
-  font-size: 16px
-  font-weight: bold
-  color: #ddd
-  p
-    color: #08c
-  &:hover, &.active
-    border: 2px dashed #08c
-    color: #08c
-  input
-    display: none
-
 .feedback
   .icon-ok
     color: #468847
+  .accordion-group
+    margin: -1px
+    @include border-radius(0px)
