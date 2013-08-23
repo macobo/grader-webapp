@@ -19,4 +19,4 @@ npm install
 grunt build
 
 cd ..
-supervisorctl update
+kill -HUP `cat /home/macobo/jobs/.gunicorn.pid`
