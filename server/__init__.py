@@ -30,6 +30,7 @@ def root():
 @app.route('/api/grade_solution', methods=['POST'])
 def test_solution():
     data = request.json
+    app.logger.debug(data)
 
     temp_dir = config.TESTERS_DIR # TODO!
     tester_module = config.get_tester_module(data['task'])
@@ -40,7 +41,6 @@ def test_solution():
             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = subproc.communicate()
         app.logger.debug(stderr)
-    app.logger.debug(stdout.decode("utf-8"))
     answer = json.loads(stdout.decode("utf-8"))
     app.logger.debug(answer)
     return jsonify(answer)

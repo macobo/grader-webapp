@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('graderApp', [])
+angular.module('graderApp', ['ui.bootstrap'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
