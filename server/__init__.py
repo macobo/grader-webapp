@@ -44,3 +44,11 @@ def test_solution():
     answer = json.loads(stdout.decode("utf-8"))
     app.logger.debug(answer)
     return jsonify(answer)
+
+
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    " github webhook "
+    app.logger.info(request.form["payload"])
+    subprocess.call(os.path.join(config.SERVER_DIR, "deploy", "update.sh"))
+    return ""
