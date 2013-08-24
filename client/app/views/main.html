@@ -38,7 +38,9 @@
       </accordion-heading>
 
       <p ng-show="result.success">Tubli töö!</p>
-      <ace-editor language="python" model="code" init-code='{{ result.trace }}' ng-hide="result.success" static>
+      <div  ng-hide="result.success">
+        <ace-editor language="python" model="code" init-code='{{ result.trace }}' ng-hide="result.success" static>
+      </div>
         
       </ace-editor>
     </accordion-group>
