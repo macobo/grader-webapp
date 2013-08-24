@@ -264,7 +264,7 @@ module.exports = function (grunt) {
             '.htaccess',
             'images/{,*/}*.{gif,webp}',
             'styles/fonts/*',
-            'components/ace-builds/src-min-noconflict/**/*.*'
+            'components/**/*.*'
           ]
         }]
       }
