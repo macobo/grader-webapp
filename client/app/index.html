@@ -27,7 +27,22 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container" ng-view></div>
+    <div class="container">
+      <div class="push" ng-view>></div>
+
+    </div>
+
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">
+          <a href="https://github.com/macobo/grader-webapp">
+            <i class="icon-github icon-large"></i>
+          </a>
+          <span class="pull-right">
+            Karl-Aksel Puulmann, 2013
+          </span>
+      </div>
+    </div>
 
     <script src="components/ace-builds/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="components/angular/angular.js"></script>
