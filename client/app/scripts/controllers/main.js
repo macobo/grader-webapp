@@ -12,6 +12,8 @@ angular.module('graderApp')
     ];
 
     $scope.postSolution = function() {
+      if ($scope.feedbackAwait) return;
+
       if ($scope.code && $scope.selectedTask) {
         $scope.feedbackAwait = true;
         var data = {
@@ -30,13 +32,8 @@ angular.module('graderApp')
         }).error(function (data, status, headers, config) {
           console.debug('failure, ', arguments);
           $scope.feedbackAwait = false;
+          if (!$scope.$$phase) $scope.$apply();
         });
       }
     };
-
-    $scope.background = function(success) {
-      console.log(success);
-      return success ? 'alert-success' : 'alert-error';
-    };
-
   });
