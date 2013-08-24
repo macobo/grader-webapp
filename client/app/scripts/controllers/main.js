@@ -13,6 +13,7 @@ angular.module('graderApp')
 
     $scope.postSolution = function() {
       if ($scope.code && $scope.selectedTask) {
+        $scope.feedbackAwait = true;
         var data = {
           code: $scope.code,
           task: $scope.selectedTask
@@ -25,8 +26,10 @@ angular.module('graderApp')
         }).success(function (answer) {
           console.log(answer, arguments);
           $scope.feedback = answer.results;
+          $scope.feedbackAwait = false;
         }).error(function (data, status, headers, config) {
           console.debug('failure, ', arguments);
+          $scope.feedbackAwait = false;
         });
       }
     };
