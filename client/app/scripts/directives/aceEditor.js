@@ -26,7 +26,7 @@ angular.module('graderApp')
 
         editor.on('change', function() {
           scope.model = editor.getValue();
-          //if (!scope.$$phase) scope.$apply();
+          _.defer(function(){scope.$apply();});
         });
 
         scope.$watch('initCode', function() {

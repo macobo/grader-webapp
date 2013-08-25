@@ -17,7 +17,7 @@ angular.module('graderApp')
         feedbackService
           .askFeedback($scope.selectedTask, $scope.code)
           .then(function(feedback) {
-            console.log(feedback);
+            console.debug('Got feedback', feedback);
             $scope.feedbackAwait = false;
             $scope.feedback = feedback;
           }, function(reason) {
