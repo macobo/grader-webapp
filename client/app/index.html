@@ -35,9 +35,13 @@
     <div id="footer">
       <div class="container">
         <p class="muted credit">
-          <a href="https://github.com/macobo/grader-webapp">
+          <a href="https://github.com/macobo/grader-webapp" tooltip-html-unsafe="Projekti github">
             <i class="icon-github icon-2x"></i>
           </a>
+          <a href="https://courses.cs.ut.ee/MTAT.03.100/2012_fall/uploads/opik/" tooltip-html-unsafe="Õpik">
+            <i class="icon-book icon-2x"></i>
+          </a>
+          <!-- TODO: link to courses, moodle -->
           <span class="pull-right">
             Karl-Aksel Puulmann, 2013
           </span>
@@ -45,7 +49,7 @@
     </div>
 
     <script src="components/ace-builds/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-    <script src="components/angular/angular.js"></script>
+    <script src="components/angular-unstable/angular.js"></script>
     <script src="components/angular-resource/angular-resource.js"></script>
     <script src="components/angular-sanitize/angular-sanitize.js"></script>
     <script src="components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
@@ -54,6 +58,7 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/directives/aceEditor.js"></script>
+    <script src="scripts/services/feedbackService.js"></script>
     <!-- endbuild -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

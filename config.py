@@ -13,5 +13,5 @@ def get_tasks():
 
 def get_tester_module(task):
     tasks = get_tasks()
-    module = graders[task["unit"]][task["name"].lower()]["tester"]
+    module = tasks[task["unit"]][task["name"].lower()]["tester"]
     return module
