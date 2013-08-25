@@ -1,15 +1,9 @@
 'use strict';
 
 angular.module('graderApp')
-  .controller('MainCtrl', function ($scope, $http) {
-    // TODO: make this be loaded from tasks.json
-    $scope.tasks = [
-      { name: 'Küpsisetort', unit: '2' },
-      { name: 'Nimed', unit: '2' },
-      { name: 'Intress', unit: '2'},
-      { name: 'Täisnurkne kolmnurk', unit: '6' },
-      { name: 'Tagurpidi', unit: '12' }
-    ];
+  .controller('MainCtrl', function ($scope, $http, tasks) {
+    // loaded from tasks.json
+    $scope.tasks = tasks.data.tasks;
 
     $scope.postSolution = function() {
       if ($scope.feedbackAwait) return;

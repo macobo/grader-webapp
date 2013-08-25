@@ -46,6 +46,16 @@ def test_solution():
     return jsonify(answer)
 
 
+@app.route('/api/tasks', methods=['GET'])
+def get_tasks():
+    tasks = config.get_tasks()
+    # the app uses form [{name: task_name, unit: unit}...]
+    rev_tasks = [{"unit": unit, "name": name.capitalize()} 
+                for unit in tasks for name in tasks[unit]]
+    rev_tasks.sort(key = lambda e: (int(e["unit"]), e["name"]))
+    return jsonify({"tasks": rev_tasks})
+
+
 @app.route('/webhook', methods=['POST'])
 def webhook():
     " github webhook "
