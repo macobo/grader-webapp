@@ -1,9 +1,12 @@
 'use strict';
 
 angular.module('graderApp')
-  .controller('MainCtrl', function ($scope, feedbackService, tasks) {
+  .controller('MainCtrl', function ($scope, feedbackService) {
     // loaded from tasks.json
-    $scope.tasks = tasks;
+    feedbackService.getTasks()
+      .then(function(tasks) {
+        $scope.tasks = tasks;
+      });
 
     $scope.postSolution = function() {
       if ($scope.feedbackAwait) return;
@@ -14,9 +17,11 @@ angular.module('graderApp')
         feedbackService
           .askFeedback($scope.selectedTask, $scope.code)
           .then(function(feedback) {
+            console.log(feedback);
             $scope.feedbackAwait = false;
             $scope.feedback = feedback;
           }, function(reason) {
+            console.error(reason);
             $scope.feedbackAwait = false;
           });
       }

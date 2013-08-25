@@ -5,12 +5,7 @@ angular.module('graderApp', ['ui.bootstrap'])
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        resolve: {
-          tasks: function(feedbackService) {
-            return feedbackService.getTasks().promise;
-          }
-        }
+        controller: 'MainCtrl'
       })
       .otherwise({
         redirectTo: '/'

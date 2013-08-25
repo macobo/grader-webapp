@@ -10,11 +10,12 @@ angular.module('graderApp')
           method: 'POST',
           data: {task: taskName, code: code}
         }).success(function (answer) {
-          deferred.resolve(answer.result);
+          deferred.resolve(answer.results);
         }).error(function (data, status, headers, config) {
+          console.error("askFeedback", arguments);
           deferred.reject(data);
         });
-        return deferred;
+        return deferred.promise;
       },
 
       getTasks: function() {
@@ -24,7 +25,7 @@ angular.module('graderApp')
         }, function(reason) {
           deferred.reject(reason);
         });
-        return deferred;
+        return deferred.promise;
       }
     };
   });
