@@ -39,7 +39,7 @@
 
       <p ng-show="result.success">Tubli töö!</p>
       <div  ng-hide="result.success">
-        <ace-editor language="python" model="code" init-code='{{ result.trace }}' ng-hide="result.success" static>
+        <ace-editor language="python" model="code" init-code='{{ result.traceback }}' ng-hide="result.success" static>
       </div>
         
       </ace-editor>

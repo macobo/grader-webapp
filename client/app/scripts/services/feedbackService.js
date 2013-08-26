@@ -10,7 +10,6 @@ angular.module('graderApp')
           method: 'POST',
           data: {task: taskName, code: code}
         }).success(function (answer) {
-          console.log(answer.results);
           deferred.resolve(answer.results);
         }).error(function (data, status, headers, config) {
           console.error('askFeedback', arguments);
