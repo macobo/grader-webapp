@@ -2,6 +2,7 @@ import os.path
 import config
 import json
 import subprocess
+import grader
 from grader.utils import tempModule
 
 from werkzeug.contrib.fixers import ProxyFix
@@ -31,17 +32,11 @@ def root():
 def test_solution():
     data = request.json
     app.logger.debug(data)
-
-    temp_dir = config.TESTERS_DIR # TODO!
-    tester_module = config.get_tester_module(data['task'])
-    with tempModule(data['code'], temp_dir) as solution_module:
-        subproc = subprocess.Popen(
-            ['python3', '-m', 'grader', tester_module, solution_module],
-            cwd=temp_dir, stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        stdout, stderr = subproc.communicate()
-        app.logger.debug(stderr)
-    answer = json.loads(stdout.decode("utf-8"))
+    answer = grader.test_code(
+        config.get_tester_module(data['task']),
+        data['code'],
+        config.TESTERS_DIR # TODO:
+    )
     app.logger.debug(answer)
     return jsonify(answer)
 
