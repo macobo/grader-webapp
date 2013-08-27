@@ -11,17 +11,18 @@ from flask import Flask, request, jsonify
 app = Flask(__name__, static_folder='static', static_url_path='')
 app.wsgi_app = ProxyFix(app.wsgi_app) # for gunicorn
 
-if not app.debug:
-    import logging
-    from logging.handlers import RotatingFileHandler
-    file_handler_path = os.path.join(config.ROOT_DIR, 'flask.log')
-    file_handler = RotatingFileHandler(file_handler_path, maxBytes=10**7)
-    file_handler.setLevel(logging.DEBUG)
-    file_handler.setFormatter(logging.Formatter(
-        '%(asctime)s %(levelname)s: %(message)s '
-        '[in %(pathname)s:%(lineno)d]'
-    ))
-    app.logger.addHandler(file_handler)
+
+import logging
+from logging.handlers import RotatingFileHandler
+file_handler_path = os.path.join(config.ROOT_DIR, 'flask.log')
+file_handler = RotatingFileHandler(file_handler_path, maxBytes=10**7)
+file_handler.setLevel(logging.DEBUG)
+file_handler.setFormatter(logging.Formatter(
+    '%(asctime)s %(levelname)s: %(message)s '
+    '[in %(pathname)s:%(lineno)d]'
+))
+app.logger.addHandler(file_handler)
+
 
 @app.route('/')
 def root():
@@ -31,7 +32,7 @@ def root():
 @app.route('/api/grade_solution', methods=['POST'])
 def test_solution():
     data = request.json
-    app.logger.debug(data)
+    app.logger.info(data)
     answer = grader.test_code(
         config.get_tester_module(data['task']),
         data['code'],
