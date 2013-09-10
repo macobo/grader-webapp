@@ -5,6 +5,7 @@
 
 APP_FOLDER=/home/macobo/projects/grader-webapp/
 GRADER_FOLDER=/home/macobo/projects/python-grader/
+TASKS_FOLDER=/home/macobo/projects/grader-tasks/
 
 cd $GRADER_FOLDER
 git pull
@@ -12,6 +13,10 @@ python setup.py install
 
 cd $APP_FOLDER
 git pull
+
+cd $TASKS_FOLDER
+git pull
+
 cd client
 # install new dependencies, build static files
 bower install
