@@ -42,7 +42,7 @@ def test_solution():
     return jsonify(answer)
 
 @app.route('/api/grade', methods=['POST'])
-def test_solution():
+def test_solution2():
     data = request.json
     app.logger.info(data)
     answer = grader.test_code(
