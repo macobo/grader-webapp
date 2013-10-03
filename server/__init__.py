@@ -41,6 +41,18 @@ def test_solution():
     app.logger.debug(answer)
     return jsonify(answer)
 
+@app.route('/api/grade', methods=['POST'])
+def test_solution():
+    data = request.json
+    app.logger.info(data)
+    answer = grader.test_code(
+        data['task_code'],
+        data['user_code'],
+        config.TASKS_DIR # TODO:
+    )
+    app.logger.debug(answer)
+    return jsonify(answer)
+
 
 @app.route('/api/tasks', methods=['GET'])
 def get_tasks():
