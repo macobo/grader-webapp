@@ -21,5 +21,5 @@ def get_tester_dir(task):
     unit = tasks[task["unit"]]
     path = TASKS_DIR
     if "path" in unit:
-        path = join(path, unit["path"])
+        path = join(path, unit["dir"])
     return path
