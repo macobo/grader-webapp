@@ -33,10 +33,11 @@ def root():
 def test_solution():
     data = request.json
     app.logger.info(data)
+    task = config.get_tester_module(data['task'])
     answer = grader.test_code(
-        config.get_tester_module(data['task']),
+        task,
         data['code'],
-        config.TASKS_DIR # TODO:
+        config.get_tester_dir(task)
     )
     app.logger.debug(answer)
     return jsonify(answer)

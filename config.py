@@ -15,3 +15,11 @@ def get_tester_module(task):
     tasks = get_tasks()
     module = tasks[task["unit"]][task["name"].lower()]["tester"]
     return module
+
+def get_tester_dir(task):
+    tasks = get_tasks()
+    unit = tasks[task["unit"]]
+    path = TASKS_DIR
+    if "path" in unit:
+        path = join(path, unit["path"])
+    return path
