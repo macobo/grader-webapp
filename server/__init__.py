@@ -37,7 +37,7 @@ def test_solution():
     answer = grader.test_code(
         task,
         data['code'],
-        config.get_tester_dir(task)
+        config.get_tester_dir(data['task'])
     )
     app.logger.debug(answer)
     return jsonify(answer)
