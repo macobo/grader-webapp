@@ -4,6 +4,7 @@ angular.module('graderApp')
   .factory('feedbackService', function ($http, $q) {
     return {
       askFeedback: function(taskName, code) {
+        console.log('Asking feedback for ', taskName, 'code: ', {code: code});
         var deferred = $q.defer();
         $http({
           url: '/api/grade_solution',

@@ -7,7 +7,7 @@ from grader.utils import tempModule
 
 from werkzeug.contrib.fixers import ProxyFix
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, abort
 app = Flask(__name__, static_folder='static', static_url_path='')
 app.wsgi_app = ProxyFix(app.wsgi_app) # for gunicorn
 
@@ -33,26 +33,30 @@ def root():
 def test_solution():
     data = request.json
     app.logger.info(data)
-    task = config.get_tester_module(data['task'])
-    answer = grader.test_code(
-        task,
-        data['code'],
-        config.get_tester_dir(data['task'])
-    )
-    app.logger.debug(answer)
-    return jsonify(answer)
+    try:
+        task = config.get_tester_module(data['task'])
+        answer = grader.test_code(
+            task,
+            data['code'],
+            config.get_tester_dir(data['task'])
+        )
+        app.logger.debug(answer)
+        return jsonify(answer)
+    except Exception as e:
+        app.logger.error(e)
+        abort(501)
 
-@app.route('/api/grade', methods=['POST'])
-def test_solution2():
-    data = request.json
-    app.logger.info(data)
-    answer = grader.test_code(
-        data['task_code'],
-        data['user_code'],
-        config.TASKS_DIR # TODO:
-    )
-    app.logger.debug(answer)
-    return jsonify(answer)
+# @app.route('/api/grade', methods=['POST'])
+# def test_solution2():
+#     data = request.json
+#     app.logger.info(data)
+#     answer = grader.test_code(
+#         data['task_code'],
+#         data['user_code'],
+#         config.TASKS_DIR # TODO:
+#     )
+#     app.logger.debug(answer)
+#     return jsonify(answer)
 
 
 @app.route('/api/tasks', methods=['GET'])
