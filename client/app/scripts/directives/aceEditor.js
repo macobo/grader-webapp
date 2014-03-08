@@ -1,43 +1,44 @@
 'use strict';
 
 angular.module('graderApp')
-  .directive('aceEditor', function () {
+  .directive('editor', function () {
     return {
-      template: '<div class="ace-container"><pre id="editor" class="ace-editor" ng-transclude></pre></div>',
+      template: '<div class="editor">' +
+                '</div>',
       restrict: 'E',
       replace: true,
       transclude: true,
       scope: { model: '=', initCode: '@' },
 
       link: function postLink(scope, elem, attrs) {
-        var editor = ace.edit(elem[0]);
-        editor.setTheme('ace/theme/xcode');
-        editor.getSession().setMode('ace/mode/'+attrs.language);
-        editor.getSession().setUseWrapMode(true);
-        editor.setShowPrintMargin(false);
-        editor.setShowInvisibles(true);
+        var options = { 
+          value: scope.initCode.trim(),
+          lineNumbers: true,
+          theme:'default',
+          lineWrapping : true,
+          mode: 'python'
+        };
+        var editor = CodeMirror(elem[0], options);
 
-        if (attrs.hasOwnProperty('static')) {
-          editor.setReadOnly(true);
-          editor.renderer.setShowGutter(false);
-        }
-
-        scope.model = editor.getValue();
-
-        editor.on('change', function() {
-          scope.model = editor.getValue();
-          _.defer(function(){scope.$apply();});
-        });
-
-        scope.$watch('initCode', function() {
-          editor.setValue(scope.initCode.trim(), 0);
-          editor.clearSelection();
-          if (attrs.hasOwnProperty('static')) {
-            var lines = scope.initCode.trim().split('\n').length;
-            elem.css('height', 2*lines+'em');
-            editor.resize();
-          }
-        });
+        scope.$on('resize', function() {
+          $(editor.getWrapperElement()).height(elem.height());
+          editor.refresh();
+        })
       }
     };
+  })
+  .directive('asHigh', function() {
+    return {
+      link: function(scope, elem, attrs) {
+        var parent = $(attrs['asHigh']);
+        function update() {
+          elem.height(parent.height());
+          scope.$emit('resize', elem);
+        }
+
+        $(window).resize(update);
+        update();
+      }
+    }
   });
+

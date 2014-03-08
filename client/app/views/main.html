@@ -1,48 +1,10 @@
-<div class="row-fluid">
-  <div class="span12">
-    <ace-editor language="python" model="code" init-code="print('Hello world')">
-    </ace-editor>
-
-    <select data-ng-model="selectedTask"
-      data-ng-options="task.name group by 'Peatükk '+task.unit for task in tasks">
-      <option value="" disabled selected style="display:none">
-        Vali ülesanne
-      </option>           
-    </select>
-
-    <span class="uploadbutton pull-right" ng-click="postSolution()">
-      <a ng-hide="feedbackAwait">
-        Saa tagasiside 
-      </a>
-      <a ng-show="feedbackAwait">
-        <i class="icon-spinner icon-spin"></i>
-        Palun oota
-      </a>
-    </span>
+<div class="row container">
+  <div class="col-lg-6 col">
+    <!-- <ace-editor language="python" model="code" init-code="print('Hello world')" as-high-as=".container">
+    </ace-editor> -->
   </div>
-</div>
-
-<div class="feedback row-fluid" ng-show="feedback">
-  <hr>
-  <h2>Tagasiside</h2>
-  <accordion>
-    <accordion-group ng-repeat="result in feedback">
-      <accordion-heading>
-        <span ng-class="{ success: (result.success), error: (!result.success) }">
-          <i class="icon-ok check-mark" ng-show="result.success"></i>
-          {{ result.description }} 
-          <span class="pull-right">
-            <i class="icon-time"></i> {{ result.time }}s
-          </span>
-        </span>
-      </accordion-heading>
-
-      <p ng-show="result.success">Tubli töö!</p>
-      <div  ng-hide="result.success">
-        <ace-editor language="python" model="code" init-code='{{ result.traceback }}' ng-hide="result.success" static>
-      </div>
-        
-      </ace-editor>
-    </accordion-group>
-  </accordion>
+  <div class="col-lg-6 col">
+    <!-- <ace-editor language="python" model="code2" init-code="print('Hello world')" as-high-as=".container">
+    </ace-editor> -->
+  </div>
 </div>
