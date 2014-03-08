@@ -20,10 +20,19 @@ angular.module('graderApp')
         };
         var editor = CodeMirror(elem[0], options);
 
+        editor.on('change', function (instance) {
+          var newValue = instance.getValue();
+          scope.model = newValue;
+          if (!scope.$$phase) {
+            scope.$apply();
+          }
+        });
+        scope.model = scope.initCode.trim();
+
         scope.$on('resize', function() {
           $(editor.getWrapperElement()).height(elem.height());
           editor.refresh();
-        })
+        });
       }
     };
   })
@@ -32,6 +41,7 @@ angular.module('graderApp')
       link: function(scope, elem, attrs) {
         var parent = $(attrs['asHigh']);
         function update() {
+          console.log("resizing", elem.height(), parent.height())
           elem.height(parent.height());
           scope.$emit('resize', elem);
         }

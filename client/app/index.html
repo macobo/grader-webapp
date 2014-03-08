@@ -3,112 +3,113 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Hindaja</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <!-- build:css styles/main.css -->
-    <link rel="stylesheet" href="styles/compiled_css/main.css">
-    <link rel="stylesheet" href="components/codemirror/lib/codemirror.css">
-    <!-- endbuild -->
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
-  </head>
-  <body ng-app="graderApp" ng-controller="MainCtrl">
-    <!--[if lt IE 7]>
-      <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
-    <![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Hindaja</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <!-- build:css styles/main.css -->
+  <link rel="stylesheet" href="styles/compiled_css/main.css">
+  <link rel="stylesheet" href="components/codemirror/lib/codemirror.css">
+  <!-- endbuild -->
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body ng-app="graderApp" ng-controller="MainCtrl">
+  <!--[if lt IE 7]>
+  <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+  <![endif]-->
+  <!--[if lt IE 9]>
+  <script src="components/es5-shim/es5-shim.js"></script>
+  <script src="components/json3/lib/json3.min.js"></script>
+  <![endif]-->
+      <div class="navbar-xs">
+        <div class="navbar-primary">
 
-    <!--[if lt IE 9]>
-      <script src="components/es5-shim/es5-shim.js"></script>
-      <script src="components/json3/lib/json3.min.js"></script>
-    <![endif]-->
+          <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <a class="navbar-brand" href="#">PyGrader</a>
+              </div>
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                  <li class="active">
+                    <a href="#" ng-click="postSolution()">
+                      <i class="fa fa-arrow-circle-right"></i> Hinda lahendust
+                    </a>
+                  </li>
+                </ul>
 
-    <div class="navbar-xs">
-   <div class="navbar-primary">
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">PyGrader</a>
+                <ul class="nav navbar-nav navbar-right icons">
+                  <li>
+                    <a href="https://github.com/macobo/grader-webapp" tooltip-html-unsafe="Projekti github">
+                    <i class="fa fa-github fa-lg"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://courses.cs.ut.ee/MTAT.03.100/2012_fall/uploads/opik/" tooltip-html-unsafe="Õpik">
+                    <i class="fa fa-book fa-lg"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
         </div>
+      </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Link</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right icons">
-            <li>
-              <a href="https://github.com/macobo/grader-webapp" tooltip-html-unsafe="Projekti github">
-                <i class="fa fa-github fa-lg"></i>
-              </a>
-            </li>
-            <li>
-              <a href="https://courses.cs.ut.ee/MTAT.03.100/2012_fall/uploads/opik/" tooltip-html-unsafe="Õpik">
-                <i class="fa fa-book fa-lg"></i>
-              </a>
-            </li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
-    </div>
-    </div>
-
-
-    <div class="container">
-      <div class="row container">
-        <div class="col-md-4 col">
-          <div class="pane-label">
+      <div class="container" id="container">
+        <div class="row container">
+          <div class="col-md-4 col">
+            <div class="pane-label">
               Tester
+            </div>
+            <editor init-code="print('Hello world')" as-high="#container" model="grader_code"></editor>
           </div>
-          <editor init-code="print('Hello world')" as-high=".container"></editor>
-        </div>
-        <div class="col-md-4 col">
-          <div class="pane-label">
-            Testitav kood
+
+          <div class="col-md-4 col">
+            <div class="pane-label">
+              Testitav kood
+            </div>
+            <editor init-code="print('Hello world')" as-high="#container" model="solution_code"></editor>
           </div>
-          <editor init-code="print('Hello world')" as-high=".container"></editor>
-        </div>
-        <div class="col-md-4 col results">
-          <div class="pane-label">
-            Tagasiside
+
+          <div class="col-md-4 col results">
+            <div class="pane-label">
+              Tagasiside
+            </div>
+
+            <pre ng-show="feedback" ng-cloak>{{ feedback | json }}</pre>
           </div>
         </div>
       </div>
-    </div>
 
-
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-    <script src="components/codemirror/lib/codemirror.js"></script>
-    <script src="components/codemirror/mode/python/python.js"></script>
-    <script src="components/angular-unstable/angular.js"></script>
-    <script src="components/angular-resource/angular-resource.js"></script>
-    <script src="components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script src="components/underscore/underscore-min.js"></script>
-
-    <!-- build:js scripts/scripts.js -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/directives/aceEditor.js"></script>
-    <script src="scripts/services/feedbackService.js"></script>
-    <!-- endbuild -->
-
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-    <script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+      <script src="components/codemirror/lib/codemirror.js"></script>
+      <script src="components/codemirror/mode/python/python.js"></script>
+      <script src="components/angular-unstable/angular.js"></script>
+      <script src="components/angular-resource/angular-resource.js"></script>
+      <script src="components/angular-sanitize/angular-sanitize.js"></script>
+      <script src="components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+      <script src="components/underscore/underscore-min.js"></script>
+      <!-- build:js scripts/scripts.js -->
+      <script src="scripts/app.js"></script>
+      <script src="scripts/controllers/main.js"></script>
+      <script src="scripts/directives/aceEditor.js"></script>
+      <script src="scripts/services/feedbackService.js"></script>
+      <!-- endbuild -->
+      <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+      <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
       ga('create', 'UA-37386009-3', '162.216.45.14');
       ga('send', 'pageview');
-
-    </script>
-  </body>
-</html>
+      </script>
+    </body>
+  </html>

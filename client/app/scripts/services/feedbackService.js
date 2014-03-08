@@ -3,15 +3,15 @@
 angular.module('graderApp')
   .factory('feedbackService', function ($http, $q) {
     return {
-      askFeedback: function(taskName, code) {
-        console.log('Asking feedback for ', taskName, 'code: ', {code: code});
+      askFeedback: function(grader_code, solution_code) {
+        console.log('Asking feedback', arguments);
         var deferred = $q.defer();
         $http({
-          url: '/api/grade_solution',
+          url: '/api/grade',
           method: 'POST',
-          data: {task: taskName, code: code}
+          data: {solution_code: solution_code, grader_code: grader_code}
         }).success(function (answer) {
-          deferred.resolve(answer.results);
+          deferred.resolve(answer);
         }).error(function (data, status, headers, config) {
           console.error('askFeedback', arguments);
           deferred.reject(data);

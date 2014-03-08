@@ -3,14 +3,14 @@ import config
 import json
 import subprocess
 import grader
-from grader.utils import tempModule
+from flask.ext.pymongo import PyMongo
 
 from werkzeug.contrib.fixers import ProxyFix
 
 from flask import Flask, request, jsonify, abort
 app = Flask(__name__, static_folder='static', static_url_path='')
 app.wsgi_app = ProxyFix(app.wsgi_app) # for gunicorn
-
+db = PyMongo(app)
 
 import logging
 from logging.handlers import RotatingFileHandler
@@ -23,50 +23,16 @@ file_handler.setFormatter(logging.Formatter(
 ))
 app.logger.addHandler(file_handler)
 
-
-@app.route('/')
-def root():
-    return app.send_static_file('index.html')
-
-
-@app.route('/api/grade_solution', methods=['POST'])
-def test_solution():
+@app.route('/api/grade', methods=['POST'])
+def test_solution2():
     data = request.json
     app.logger.info(data)
-    try:
-        task = config.get_tester_module(data['task'])
-        answer = grader.test_code(
-            task,
-            data['code'],
-            config.get_tester_dir(data['task'])
-        )
-        app.logger.debug(answer)
-        return jsonify(answer)
-    except Exception as e:
-        app.logger.error(e)
-        abort(501)
-
-# @app.route('/api/grade', methods=['POST'])
-# def test_solution2():
-#     data = request.json
-#     app.logger.info(data)
-#     answer = grader.test_code(
-#         data['task_code'],
-#         data['user_code'],
-#         config.TASKS_DIR # TODO:
-#     )
-#     app.logger.debug(answer)
-#     return jsonify(answer)
-
-
-@app.route('/api/tasks', methods=['GET'])
-def get_tasks():
-    tasks = config.get_tasks()
-    # the app uses form [{name: task_name, unit: unit}...]
-    rev_tasks = [{"unit": unit, "name": name.capitalize()} 
-                for unit in tasks for name in tasks[unit]]
-    rev_tasks.sort(key = lambda e: (int(e["unit"]) if e["unit"].isdigit() else 1, e["name"]))
-    return jsonify({"tasks": rev_tasks})
+    answer = grader.test_solution(
+        data['grader_code'],
+        data['solution_code']   
+    )
+    app.logger.debug(answer)
+    return jsonify(answer)
 
 
 @app.route('/webhook', methods=['POST'])
