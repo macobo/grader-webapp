@@ -29,4 +29,43 @@ angular.module('graderApp')
         return deferred.promise;
       }
     };
-  });
+  })
+  .factory('gist', function ($http, $q) {
+    return {
+      load: function(name) {
+        var deferred = $q.defer();
+        $http.get('/api/gists/'+name)
+          .success(function (answer) {
+            deferred.resolve(answer);
+          }).error(function (data, status, headers, config) {
+            deferred.reject(data);
+          });
+        return deferred.promise;
+      },
+      save: function(grader_code, solution_code, name) {
+        var data = { 
+          'post': {
+            'solution_code': solution_code,
+            'grader_code': grader_code
+          }
+        };
+        if (name) 
+          data['name'] = name;
+
+        console.log("Saving", data);
+
+        var deferred = $q.defer();
+        $http({
+          url: '/api/gists',
+          method: 'POST',
+          data: data
+        }).success(function (answer) {
+          deferred.resolve(answer);
+        }).error(function (data, status, headers, config) {
+          console.error('saveGist', arguments);
+          deferred.reject(data);
+        });
+        return deferred.promise;
+      }
+    };
+  })

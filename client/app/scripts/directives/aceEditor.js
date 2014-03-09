@@ -12,13 +12,14 @@ angular.module('graderApp')
 
       link: function postLink(scope, elem, attrs) {
         var options = { 
-          value: scope.initCode.trim(),
+          value: scope.model.trim(),
           lineNumbers: true,
           theme:'default',
           lineWrapping : true,
           mode: 'python'
         };
         var editor = CodeMirror(elem[0], options);
+        console.log(scope, scope.model);
 
         editor.on('change', function (instance) {
           var newValue = instance.getValue();
@@ -27,7 +28,6 @@ angular.module('graderApp')
             scope.$apply();
           }
         });
-        scope.model = scope.initCode.trim();
 
         scope.$on('resize', function() {
           $(editor.getWrapperElement()).height(elem.height());

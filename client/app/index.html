@@ -1,8 +1,5 @@
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -17,7 +14,7 @@
   <!-- endbuild -->
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
 </head>
-<body ng-app="graderApp" ng-controller="MainCtrl">
+<body ng-app="graderApp" ng-controller="GlobalCtrl">
   <!--[if lt IE 7]>
   <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
   <![endif]-->
@@ -36,10 +33,15 @@
               </div>
               <!-- Collect the nav links, forms, and other content for toggling -->
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                  <li class="active">
-                    <a href="#" ng-click="postSolution()">
+                <ul class="nav navbar-nav" ng-cloak>
+                  <li class="active" ng-show="$state.current.hasEditor">
+                    <a href="" ng-click="broadcast('grade')">
                       <i class="fa fa-arrow-circle-right"></i> Hinda lahendust
+                    </a>
+                  </li>
+                  <li class="" ng-show="$state.current.hasEditor">
+                    <a href="" ng-click="broadcast('save')">
+                      <i class="fa fa-save"></i> Salvesta
                     </a>
                   </li>
                 </ul>
@@ -61,37 +63,15 @@
           </nav>
         </div>
       </div>
-
       <div class="container" id="container">
-        <div class="row container">
-          <div class="col-md-4 col">
-            <div class="pane-label">
-              Tester
-            </div>
-            <editor init-code="print('Hello world')" as-high="#container" model="grader_code"></editor>
-          </div>
-
-          <div class="col-md-4 col">
-            <div class="pane-label">
-              Testitav kood
-            </div>
-            <editor init-code="print('Hello world')" as-high="#container" model="solution_code"></editor>
-          </div>
-
-          <div class="col-md-4 col results">
-            <div class="pane-label">
-              Tagasiside
-            </div>
-
-            <pre ng-show="feedback" ng-cloak>{{ feedback | json }}</pre>
-          </div>
-        </div>
+        <div ui-view></div>
       </div>
 
       <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
       <script src="components/codemirror/lib/codemirror.js"></script>
       <script src="components/codemirror/mode/python/python.js"></script>
       <script src="components/angular-unstable/angular.js"></script>
+      <script src="components/angular-ui-router/release/angular-ui-router.min.js"></script>
       <script src="components/angular-resource/angular-resource.js"></script>
       <script src="components/angular-sanitize/angular-sanitize.js"></script>
       <script src="components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>

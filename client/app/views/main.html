@@ -1,10 +1,23 @@
 <div class="row container">
-  <div class="col-lg-6 col">
-    <!-- <ace-editor language="python" model="code" init-code="print('Hello world')" as-high-as=".container">
-    </ace-editor> -->
+  <div class="col-md-4 col">
+    <div class="pane-label">
+      Tester
+    </div>
+    <editor as-high="#container" model="grader_code"></editor>
   </div>
-  <div class="col-lg-6 col">
-    <!-- <ace-editor language="python" model="code2" init-code="print('Hello world')" as-high-as=".container">
-    </ace-editor> -->
+
+  <div class="col-md-4 col">
+    <div class="pane-label">
+      Testitav kood
+    </div>
+    <editor as-high="#container" model="solution_code"></editor>
+  </div>
+
+  <div class="col-md-4 col results">
+    <div class="pane-label">
+      Tagasiside
+    </div>
+
+    <pre ng-show="feedback" ng-cloak>{{ feedback | json }}</pre>
   </div>
 </div>

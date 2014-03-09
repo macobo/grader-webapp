@@ -36,3 +36,4 @@ nosetests.xml
 
 server/static
 flask.log
+server/secret_key
