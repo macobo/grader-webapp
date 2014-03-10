@@ -38,11 +38,6 @@ angular.module('graderApp')
             scope.$apply();
           }
         });
-
-        scope.$on('resize', function() {
-          $(editor.getWrapperElement()).height(elem.height());
-          editor.refresh();
-        });
       }
     };
   })
@@ -53,12 +48,10 @@ angular.module('graderApp')
         function update() {
           console.log("resizing", elem.height(), parent.height())
           elem.height(parent.height());
-          scope.$broadcast('resize', elem);
-          //scope.$emit('resize', elem);
         }
 
         $(window).resize(update);
-        update();
+        setTimeout(update, 100);
       }
     }
   });

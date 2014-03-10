@@ -4,7 +4,7 @@ angular.module('graderApp', ['ui.bootstrap', 'ui.router', 'ngAnimate', 'chieffan
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('list', {
-        url: '/',
+        url: '',
         templateUrl: 'views/list.html',
         controller: 'GistListCtrl',
         resolve: {

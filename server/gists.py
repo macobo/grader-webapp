@@ -24,7 +24,10 @@ def list_gists():
 @app.route('/api/gists/<name>', methods=['GET'])
 @dump_json
 def get_gist(name):
+    app.logger.info(name)
     post = db.db.gists.find_one({ "name": name }, sort=[("version", -1)])
+    if post is None:
+        abort(404)
     return post
 
 @app.route('/api/gists', methods=['POST'])
@@ -43,3 +46,11 @@ def post_gist():
             data['versions'].append(post_data)
     db.db.gists.save(data)
     return data
+
+@app.route('/api/gists/<name>/update_name', methods=['POST'])
+@dump_json
+def update_gist(name):
+    post = db.db.gists.find_one({"name": name})
+    post['name'] = request.json['new_name']
+    db.db.gists.save(post)
+    return post

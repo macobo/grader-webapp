@@ -6,10 +6,10 @@ angular.module('graderApp')
       template: '' + 
         '<div class="feedback-item">' +
           '<a ng-class="{ success: (result.success), error: (!result.success) }">' +
-            '<i class="icon-ok check-mark" ng-show="result.success"></i>' +
+            '<i class="fa fa-check" ng-show="result.success"></i> ' +
             '{{ result.description }}' +
             '<span class="pull-right">' +
-              '<i class="icon-time"></i> {{ result.time }}s' +
+              '<i class="fa fa-clock-o"></i> {{ result.time }}s' +
             '</span>' + 
           '</a>' +
           '<editor ng-hide="result.success" model="result.traceback" read-only></editor>' +

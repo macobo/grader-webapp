@@ -4,7 +4,7 @@ $header-height: 36px
 $submit-height: 40px
 body, html
   height: 100%
-  overflow: hidden
+  //overflow: hidden
 
 body > #container
   width: 100%
@@ -23,7 +23,7 @@ body > #container
       border-right: 1px solid #e7e7e7
 
 .CodeMirror, .CodeMirror-scroll
-  height: 100%
+  height: calc(100vh - 36px)
   overflow-y: auto
   overflow-x: auto
 
@@ -66,9 +66,17 @@ body > #container
 
   .success
     color: #468847
+    &:hover
+      text-decoration: none
   .error
     color: #b94a48
     cursor: pointer
+  &:hover
+    a
+      font-weight: bold
+  .editor
+    height: auto !important
+  
   padding: 8px 15px
   border: 1px solid rgb(229, 229, 229)
   @include border-radius(4px)
@@ -79,6 +87,11 @@ body > #container
     margin: 5px
     margin-top: 30px
 
+.editor-full
+  .editor
+    height: 90vh
+  .CodeMirror
+    height: 100%
 
 #loading-bar
   .bar
@@ -90,8 +103,8 @@ body > #container
 
 nav .icons
   a
-    padding-left: 0px
-    padding-right: 15px
+    padding-left: 8px
+    padding-right: 8px
   .fa
     text-decoration: none
     font-size: 1.9em
@@ -102,10 +115,6 @@ nav .icons
   .nav.pull-right
     margin-left: 10px
     margin-right: 0
-
-#submit-bar
-  height: 40px
-  margin: 0px
 
 .navbar-xs .navbar-primary .navbar
   min-height: 28px
@@ -127,8 +136,6 @@ nav .icons
     &:hover
       color: #00aaff
       //background-color: #f0f0f0
-
-
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak
   display: none !important

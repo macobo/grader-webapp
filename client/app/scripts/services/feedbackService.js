@@ -33,11 +33,12 @@ angular.module('graderApp')
   .factory('gist', function ($http, $q) {
     return {
       load: function(name) {
-        if (name) name = '/' + name;
+        if (name) name = '/' + encodeURIComponent(name);
         else name = '';
         var deferred = $q.defer();
         $http.get('/api/gists'+name)
           .success(function (answer) {
+            console.log(answer)
             deferred.resolve(answer);
           }).error(function (data, status, headers, config) {
             deferred.reject(data);
@@ -65,6 +66,19 @@ angular.module('graderApp')
           deferred.resolve(answer);
         }).error(function (data, status, headers, config) {
           console.error('saveGist', arguments);
+          deferred.reject(data);
+        });
+        return deferred.promise;
+      },
+      rename: function(old_name, new_name) {
+        var deferred = $q.defer();
+        $http({
+          url: '/api/gists/'+encodeURIComponent(old_name)+'/update_name',
+          method: 'POST',
+          data: {'new_name': new_name}
+        }).success(function (answer) {
+          deferred.resolve(answer);
+        }).error(function (data, status, headers, config) {
           deferred.reject(data);
         });
         return deferred.promise;

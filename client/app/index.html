@@ -50,15 +50,28 @@
                       <i class="fa fa-mail-forward"></i> Uus hindaja
                     </a>
                   </li>
+
                 </ul>
 
-                <ul class="nav navbar-nav navbar-right icons">
-                  <li>
+                <ul class="nav navbar-nav navbar-right">
+                  <li class="dropdown" ng-show="$state.is('gist')" ng-cloak>
+                    <a class="dropdown-toggle">
+                      <i class="fa fa-cog"></i> {{ $stateParams.gistName }}
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a href="" ng-click="broadcast('rename')">
+                          <i class="fa fa-pencil"></i> Muuda nime
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="icons">
                     <a href="https://github.com/macobo/grader-webapp" tooltip-html-unsafe="Projekti github">
                     <i class="fa fa-github fa-lg"></i>
                     </a>
                   </li>
-                  <li>
+                  <li class="icons">
                     <a href="https://courses.cs.ut.ee/MTAT.03.100/2012_fall/uploads/opik/" tooltip-html-unsafe="Õpik">
                     <i class="fa fa-book fa-lg"></i>
                     </a>
@@ -70,7 +83,7 @@
         </div>
       </div>
       <div class="container" id="container">
-        <div ui-view></div>
+        <div ui-view autoscroll='false'></div>
       </div>
 
       <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>

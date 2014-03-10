@@ -22,7 +22,9 @@ def test_solution2():
     app.logger.info(data)
     answer = grader.test_solution(
         data['grader_code'],
-        data['solution_code']   
+        data['solution_code'],
+        runner_cmd = os.path.join(grader.CURRENT_FOLDER, "sandbox", "run_test_docker_sandbox")
+
     )
     app.logger.debug(answer)
     return jsonify(answer)
