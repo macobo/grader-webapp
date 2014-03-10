@@ -33,8 +33,10 @@ angular.module('graderApp')
   .factory('gist', function ($http, $q) {
     return {
       load: function(name) {
+        if (name) name = '/' + name;
+        else name = '';
         var deferred = $q.defer();
-        $http.get('/api/gists/'+name)
+        $http.get('/api/gists'+name)
           .success(function (answer) {
             deferred.resolve(answer);
           }).error(function (data, status, headers, config) {

@@ -31,12 +31,15 @@ def get_gist(name):
 @dump_json
 def post_gist():
     post_data, name = request.json['post'], request.json.get('name', None)
-    data = {"name": name, "post": post_data, "version": 1}
+    data = {"name": name, "post": post_data, "versions": [post_data], "version": 1}
     if not name:
         data['name'] = free_name(db.db.gists)
     else:
         post = db.db.gists.find_one({"name": name}, sort=[("version", -1)])
         if post:
-            data['version'] = post['version'] + 1
-    db.db.gists.insert(data)
+            data = post
+            data['version'] += 1
+            data['post'] = post_data
+            data['versions'].append(post_data)
+    db.db.gists.save(data)
     return data

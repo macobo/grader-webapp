@@ -11,5 +11,5 @@ if not exists(secret_key_path):
     with open(secret_key_path, "wb") as f:
         f.write(os.urandom(24))
 
-with open(secret_key_path) as f:
+with open(secret_key_path, "rb") as f:
     SECRET_KEY = f.read()

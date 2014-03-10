@@ -11,15 +11,25 @@ angular.module('graderApp')
       scope: { model: '=', initCode: '@' },
 
       link: function postLink(scope, elem, attrs) {
+        var emit = function(evnt) {
+          return function() {
+            scope.$emit(evnt);
+          };
+        };
+
         var options = { 
           value: scope.model.trim(),
           lineNumbers: true,
           theme:'default',
+          nocursor: attrs.hasOwnProperty('readOnly') ? 'nocursor' : false,
           lineWrapping : true,
-          mode: 'python'
+          mode: 'python',
+          extraKeys: {
+            'Ctrl-Enter': emit('grade'),
+            'Ctrl-S': emit('save')
+          }
         };
         var editor = CodeMirror(elem[0], options);
-        console.log(scope, scope.model);
 
         editor.on('change', function (instance) {
           var newValue = instance.getValue();
@@ -43,7 +53,8 @@ angular.module('graderApp')
         function update() {
           console.log("resizing", elem.height(), parent.height())
           elem.height(parent.height());
-          scope.$emit('resize', elem);
+          scope.$broadcast('resize', elem);
+          //scope.$emit('resize', elem);
         }
 
         $(window).resize(update);

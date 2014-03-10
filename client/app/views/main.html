@@ -13,11 +13,16 @@
     <editor as-high="#container" model="solution_code"></editor>
   </div>
 
-  <div class="col-md-4 col results">
+  <div class="col-md-4 col results" as-high="#container">
     <div class="pane-label">
       Tagasiside
     </div>
 
-    <pre ng-show="feedback" ng-cloak>{{ feedback | json }}</pre>
+    <!-- <pre ng-show="feedback" ng-cloak>{{ feedback | json }}</pre> -->
+    <div class="feedback">
+      <div ng-repeat="result in feedback.results">
+        <feedback-item result="result"></feedback-item>
+      </div>
+    </div>
   </div>
 </div>

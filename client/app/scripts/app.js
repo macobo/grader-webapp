@@ -1,10 +1,18 @@
 'use strict';
 
-angular.module('graderApp', ['ui.bootstrap', 'ui.router'])
+angular.module('graderApp', ['ui.bootstrap', 'ui.router', 'ngAnimate', 'chieffancypants.loadingBar'])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('editor_blank', {
+      .state('list', {
         url: '/',
+        templateUrl: 'views/list.html',
+        controller: 'GistListCtrl',
+        resolve: {
+          gists: function(gist) { return gist.load(); }
+        }
+      })
+      .state('editor_blank', {
+        url: '/g',
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         hasEditor: true,
@@ -13,7 +21,7 @@ angular.module('graderApp', ['ui.bootstrap', 'ui.router'])
         }
       })
       .state('gist', {
-        url: '/:gistName',
+        url: '/g/:gistName',
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         hasEditor: true,
@@ -25,4 +33,7 @@ angular.module('graderApp', ['ui.bootstrap', 'ui.router'])
         }
       })
     $urlRouterProvider.otherwise('/');
+  })
+  .config(function(cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeSpinner = true;
   });

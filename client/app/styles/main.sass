@@ -4,6 +4,7 @@ $header-height: 36px
 $submit-height: 40px
 body, html
   height: 100%
+  overflow: hidden
 
 body > #container
   width: 100%
@@ -28,6 +29,7 @@ body > #container
 
 
 .pane-label
+  opacity: 0.7
   padding: 10px
   border-bottom-left-radius: 15px
   line-height: 20px
@@ -58,20 +60,33 @@ body > #container
     background-color: #0986a3
     color: white
 
-.feedback
+.feedback-item
   .icon-ok
     color: #468847
-  .accordion-group
-    margin: -1px
-    @include border-radius(0px)
 
   .success
     color: #468847
   .error
     color: #b94a48
+    cursor: pointer
+  padding: 8px 15px
+  border: 1px solid rgb(229, 229, 229)
+  @include border-radius(4px)
+
+.results
+  overflow: auto
+  .feedback
+    margin: 5px
+    margin-top: 30px
 
 
-
+#loading-bar
+  .bar
+    top: 100%
+    bottom: 0px !important
+  .peg
+    top: 100%
+    bottom: 0px !important
 
 nav .icons
   a
@@ -103,6 +118,17 @@ nav .icons
     padding-top: 7px
     padding-bottom: 7px
     line-height: 22px
+
+    -webkit-transition: all ease .3s
+    -moz-transition: all ease .3s
+    -o-transition: all ease .3s
+    transition: all ease .3s
+
+    &:hover
+      color: #00aaff
+      //background-color: #f0f0f0
+
+
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak
   display: none !important

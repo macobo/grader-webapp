@@ -17,9 +17,12 @@
     "angular-unstable": "~1.1.5",
     "angular-ui-router": "~0.2.9",
     "angular-bootstrap": "~0.5.0",
-    "codemirror": "~3.22.0"
+    "codemirror": "~3.22.0",
+    "angular-loading-bar": "~0.3.0",
+    "angular-animate": "~1.2.14",
+    "angular": "~1.2.14"
   },
   "resolutions": {
-    "angular-ui-router": "~0.2.9"
+    "angular": "~1.2.14"
   }
 }
