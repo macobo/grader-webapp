@@ -16,6 +16,10 @@ from . import models
 from .gists import mod
 app.register_blueprint(mod)
 
+@app.route('/')
+def index():
+    return app.send_static_file('index.html')
+
 @app.route('/api/grade', methods=['POST'])
 def test_solution2():
     data = request.json
@@ -23,8 +27,7 @@ def test_solution2():
     answer = grader.test_solution(
         data['grader_code'],
         data['solution_code'],
-        runner_cmd = os.path.join(grader.CURRENT_FOLDER, "sandbox", "run_test_docker_sandbox")
-
+        runner_cmd = 'docker'
     )
     app.logger.debug(answer)
     return jsonify(answer)
