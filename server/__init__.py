@@ -5,10 +5,10 @@ from flask.ext.pymongo import PyMongo
 
 from werkzeug.contrib.fixers import ProxyFix
 
-from flask import Flask, request, jsonify, abort, Response
+from flask import Flask, request, jsonify
 
 app = Flask(__name__, static_folder='static', static_url_path='')
-app.wsgi_app = ProxyFix(app.wsgi_app) # for gunicorn
+app.wsgi_app = ProxyFix(app.wsgi_app)  # for gunicorn
 app.config.from_object('config')
 db = PyMongo(app)
 
@@ -16,9 +16,11 @@ from . import models
 from .gists import mod
 app.register_blueprint(mod)
 
+
 @app.route('/')
 def index():
     return app.send_static_file('index.html')
+
 
 @app.route('/api/grade', methods=['POST'])
 def test_solution2():
@@ -27,10 +29,12 @@ def test_solution2():
     answer = grader.test_solution(
         data['grader_code'],
         data['solution_code'],
-        runner_cmd = 'docker'
+        data.get('assets_files', []),
+        'docker'
     )
     app.logger.debug(answer)
     return jsonify(answer)
+
 
 @app.route('/webhook', methods=['POST'])
 def webhook():

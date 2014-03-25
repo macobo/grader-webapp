@@ -23,10 +23,15 @@ angular.module('graderApp')
           theme:'default',
           nocursor: attrs.hasOwnProperty('readOnly') ? 'nocursor' : false,
           lineWrapping : true,
+          tabMode: "spaces",
           mode: 'python',
+          tabSize: 4,
+          indentUnit: 4,
+          
           extraKeys: {
             'Ctrl-Enter': emit('grade'),
-            'Ctrl-S': emit('save')
+            'Ctrl-S': emit('save'),
+            'Tab': "indentMore"
           }
         };
         var editor = CodeMirror(elem[0], options);

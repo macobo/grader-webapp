@@ -57,7 +57,10 @@ angular.module('graderApp')
       $scope.save($scope.gist_name);
     });
 
-    $scope.$on('grade', $scope.postSolution );
+    $scope.$on('grade', function() {
+      $scope.save($scope.gist_name);
+      $scope.postSolution();
+    });
     $scope.$on('rename', $scope.rename );
   })
   .controller('GistListCtrl', function($scope, gists) {
