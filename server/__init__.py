@@ -26,10 +26,10 @@ def index():
 def test_solution2():
     data = request.json
     app.logger.info(data)
-    answer = grader.test_solution(
+    answer = grader.test_code(
         data['grader_code'],
         data['solution_code'],
-        data.get('assets_files', []),
+        data.get('asset_files', []),
         'docker'
     )
     app.logger.debug(answer)
