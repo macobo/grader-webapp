@@ -1,11 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
 # updates application on the server
 # executed when git hook fired
 
 APP_FOLDER=/home/macobo/projects/grader-webapp/
 GRADER_FOLDER=/home/macobo/projects/python-grader/
-TASKS_FOLDER=/home/macobo/projects/grader-tasks/
 
 cd $GRADER_FOLDER
 git pull
@@ -14,8 +13,7 @@ python setup.py install
 cd $APP_FOLDER
 git pull
 
-cd $TASKS_FOLDER
-git pull
+docker pull macobo/python-grader-sandbox
 
 cd client
 # install new dependencies, build static files
