@@ -39,15 +39,30 @@ def test_solution2():
 @app.route('/webhook', methods=['POST'])
 def webhook():
     " github webhook "
-    app.logger.info(request.form["payload"])
-    subprocess.call(os.path.join(config.SERVER_DIR, "deploy", "update.sh"))
+    from grader import code_runner
+    if hasattr(request, "form") and "payload" in request.form:
+        app.logger.info("Updating. {}".format(request.form["payload"]))
+    else: 
+        app.logger.info("Updating without post.")
+
+    cmd = os.path.join(config.SERVER_DIR, "deploy", "update.sh")
+    (status, stdout, stderr) = code_runner.call_command(cmd)
+    app.logger.info("""\
+        Update results:
+        Status: {}
+        Stdout:
+        {}
+        -----
+        -----
+        Stderr:
+        {}""".format(status, stdout, stderr))
     return ""
 
 
 import logging
 from logging.handlers import RotatingFileHandler
 file_handler_path = os.path.join(config.ROOT_DIR, 'flask.log')
-file_handler = RotatingFileHandler(file_handler_path, maxBytes=10**7)
+file_handler = RotatingFileHandler(file_handler_path, maxBytes=8 * 10**7)
 file_handler.setLevel(logging.DEBUG)
 file_handler.setFormatter(logging.Formatter(
     '%(asctime)s %(levelname)s: %(message)s '
