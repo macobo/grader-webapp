@@ -3,13 +3,13 @@
 angular.module('graderApp')
   .factory('feedbackService', function ($http, $q) {
     return {
-      askFeedback: function(grader_code, solution_code) {
+      askFeedback: function(data) {
         console.log('Asking feedback', arguments);
         var deferred = $q.defer();
         $http({
           url: '/api/grade',
           method: 'POST',
-          data: {solution_code: solution_code, grader_code: grader_code}
+          data: data
         }).success(function (answer) {
           deferred.resolve(answer);
         }).error(function (data, status, headers, config) {
@@ -45,12 +45,9 @@ angular.module('graderApp')
           });
         return deferred.promise;
       },
-      save: function(grader_code, solution_code, name) {
+      save: function(data, name) {
         var data = { 
-          'post': {
-            'solution_code': solution_code,
-            'grader_code': grader_code
-          }
+          'post': data
         };
         if (name) 
           data['name'] = name;
@@ -84,4 +81,27 @@ angular.module('graderApp')
         return deferred.promise;
       }
     };
+  })
+  .factory('CurrentTester', function() {
+    // api:
+    // .solution_code, .tester_code
+    // .assets = [{filename: "", contents: ""}]
+    // setCurrent(gist)
+
+    var current = {
+      tester_code: '',
+      solution_code: '',
+      assets: []
+    };
+    current.setCurrent = function(gistInfo) {
+      var post = {};
+      if (gistInfo && gistInfo.post) 
+        post = gistInfo.post;
+      current.tester_code = post.tester_code || '';
+      current.solution_code = post.solution_code || '';
+      current.assets = post.assets || [];
+      return current;
+    };
+
+    return current;
   })

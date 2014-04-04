@@ -1,6 +1,6 @@
 <div class="container">
   <div ng-repeat="gist in gists">
-    <a ui-sref="gist({gistName: gist.name})">{{ gist.name }}</a>
-    <editor model="gist.post.grader_code" read-only></editor>
+    <a ui-sref="gist.edit({gistName: gist.name})">{{ gist.name }}</a>
+    <editor model="gist.post.tester_code" read-only></editor>
   </div>
 </div>

@@ -37,7 +37,7 @@
                 <ul class="nav navbar-nav" ng-cloak>
                   <li class="active" ng-show="$state.current.hasEditor">
                     <a href="" ng-click="broadcast('grade')">
-                      <i class="fa fa-arrow-circle-right"></i> Hinda lahendust
+                      <i class="fa fa-arrow-circle-right"></i> Testi lahendust
                     </a>
                   </li>
                   <li class="" ng-show="$state.current.hasEditor">
@@ -46,7 +46,7 @@
                     </a>
                   </li>
                   <li ui-sref-active="active">
-                    <a ui-sref="editor_blank">
+                    <a ui-sref="gist.new">
                       <i class="fa fa-mail-forward"></i> Uus hindaja
                     </a>
                   </li>
@@ -54,7 +54,7 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                  <li class="dropdown" ng-show="$state.is('gist')" ng-cloak>
+                  <li class="dropdown" ng-show="$state.is('gist.edit')" ng-cloak>
                     <a class="dropdown-toggle">
                       <i class="fa fa-cog"></i> {{ $stateParams.gistName }}
                     </a>

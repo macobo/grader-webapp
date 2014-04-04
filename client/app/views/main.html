@@ -1,27 +1,36 @@
 <div class="row container editor-full">
-  <div class="col-md-4 col">
-    <div class="pane-label">
+  <div class="col-sm-4 col-md-4 col">
+    <div class="pane-node pane-label">
       Tester
     </div>
-    <editor as-high="#container" model="grader_code"></editor>
+    <editor as-high="#container" model="current.tester_code"></editor>
   </div>
 
-  <div class="col-md-4 col">
-    <div class="pane-label">
-      Testitav kood
-    </div>
-    <editor as-high="#container" model="solution_code"></editor>
+  <div class="col-sm-4 col-md-4 col" ui-view="solution_files">
+
   </div>
 
-  <div class="col-md-4 col results" as-high="#container">
-    <div class="pane-label">
+  <div class="col-sm-4 col-md-4 col results" as-high="#container">
+    <div class="pane-node pane-label">
       Tagasiside
+    </div>
+    <div class="no-feedback" ng-hide="anyFeedback">
+      Kliki
+      <i class="fa fa-arrow-circle-right"></i>
+      peal lahenduse testimiseks
     </div>
 
     <!-- <pre ng-show="feedback" ng-cloak>{{ feedback | json }}</pre> -->
     <div class="feedback">
       <div ng-repeat="result in feedback.results">
         <feedback-item result="result"></feedback-item>
+      </div>
+    </div>
+    <div class="error-reason" ng-show="error_reason">
+      {{ error_reason.reason }}
+      <div ng-repeat="(k, info) in error_reason.extra_info">
+        {{k}}
+        <pre>{{info}}</pre>
       </div>
     </div>
   </div>

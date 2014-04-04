@@ -39,9 +39,10 @@ angular.module('graderApp')
         editor.on('change', function (instance) {
           var newValue = instance.getValue();
           scope.model = newValue;
-          if (!scope.$$phase) {
-            scope.$apply();
-          }
+        });
+
+        scope.$watch('model', function(newValue) {
+          editor.getDoc().setValue(newValue);
         });
       }
     };
@@ -51,7 +52,7 @@ angular.module('graderApp')
       link: function(scope, elem, attrs) {
         var parent = $(attrs['asHigh']);
         function update() {
-          console.log("resizing", elem.height(), parent.height())
+          console.debug("resizing", elem, elem.height(), parent.height())
           elem.height(parent.height());
         }
 

@@ -1,0 +1,25 @@
+<div class="pane-node dropdown">
+  <a href="" class="dropdown-toggle pane-label">
+    <i class="fa fa-cog"></i>Testitav kood
+  </a>
+  <ul class="dropdown-menu dropdown-menu-right">
+    <li role="presentation" ng-class="{active: active_index==-1}">
+      <a role="menuitem" tabindex="-1" href="" ng-click="setActive(-1)">
+        Näitelahendus
+      </a>
+    </li>
+    <li role="presentation" class="dropdown-header">Muud failid</li>
+    <li role="presentation" ng-repeat="asset in current.assets" ng-class="{active: active_index==$index}">
+      <a role="menuitem" tabindex="-1" href="" ng-click="setActive($index)">
+        {{ asset.filename }}
+      </a>
+    </li>
+    <li role="presentation" class="divider"></li>
+    <li role="presentation">
+      <a role="menuitem" tabindex="-1" href="" ng-click="addAssetFile()">
+        <i class="fa fa-plus"></i> Lisa fail
+      </a>
+    </li>
+  </ul>
+</div>
+<editor as-high="#container" model="active_file.contents"></editor>

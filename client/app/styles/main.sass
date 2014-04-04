@@ -28,18 +28,28 @@ body > #container
   overflow-x: auto
 
 
-.pane-label
-  opacity: 0.7
+.pane-node
   padding: 10px
   border-bottom-left-radius: 15px
   line-height: 20px
-  font-weight: bold
-  text-transform: uppercase
+  font-size: large
+  //font-weight: bold
   background-color: #f8f8f8
-  color: hsla(200, 100%, 50%, 1)
   position: absolute
   right: 0px
   z-index: 10
+
+  &.pane-label, .pane-label
+    opacity: 0.7
+    font-family: FontAwesome
+    text-transform: uppercase
+    color: #428bca//hsla(200, 100%, 50%, 1)
+  .fa
+    margin-right: 5px
+
+  .dropdown-menu
+    opacity: 1
+    min-width: 13em
 
 
 .uploadbutton
@@ -81,7 +91,7 @@ body > #container
 
 .results
   overflow: auto
-  .feedback
+  .feedback, .no-feedback, .error-reason
     margin: 5px
     margin-top: 30px
 

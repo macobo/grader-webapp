@@ -27,10 +27,10 @@ def test_solution2():
     data = request.json
     app.logger.info(data)
     answer = grader.test_code(
-        data['grader_code'],
+        data['tester_code'],
         data['solution_code'],
-        data.get('asset_files', []),
-        'docker'
+        data.get('assets', []),
+        sandbox_cmd='docker'
     )
     app.logger.debug(answer)
     return jsonify(answer)

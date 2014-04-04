@@ -34,6 +34,7 @@ def get_gist(name):
 @dump_json
 def post_gist():
     post_data, name = request.json['post'], request.json.get('name', None)
+    app.logger.debug(request.json)
     data = {"name": name, "post": post_data, "versions": [post_data], "version": 1}
     if not name:
         data['name'] = free_name(db.db.gists)
