@@ -12,7 +12,14 @@ angular.module('graderApp')
 
     $scope.CurrentTester = CurrentTester;
   })
-  .controller('MainCtrl', function ($scope, $state, $stateParams, feedbackService, gist, current) {
+  .controller('MainCtrl', function ($scope, $state, $stateParams, feedbackService, gist, current, $alert) {
+    var noTests = $alert({
+      title: 'Testimiseks kliki',
+      content: '<i class="fa fa-arrow-circle-right"></i> peal ülal ',
+      placement: 'top', type: 'info', show: true,
+      container: '#alerts'
+    });
+
     $scope.current = current;
     $scope.anyFeedback = false;
     $scope.gist_name = $stateParams.gistName; //gistInfo.name;
@@ -35,7 +42,16 @@ angular.module('graderApp')
           }, function(reason) {
             $scope.error_reason = reason;
             console.error(reason);
+
+            $alert({
+              title: 'Lahenduse esitamine ebaõnnestus',
+              content: reason,
+              placement: 'top', type: 'info', show: true,
+              container: '#alerts'
+            });
           });
+
+        noTests.hide();
       }
     };
 
@@ -50,7 +66,15 @@ angular.module('graderApp')
       }
       gist
         .save(current, name)
-        .then(result_redirect);
+        .then(result_redirect)
+        .then(function() {
+            $alert({
+              title: 'Salvestatud',
+              duration: 2,
+              placement: 'top-right', type: 'success', show: true,
+              container: '#alerts'
+            });
+        });
     };
 
     $scope.rename = function() {

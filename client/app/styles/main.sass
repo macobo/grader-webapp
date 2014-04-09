@@ -110,9 +110,19 @@ body > #container
 
 .results
   overflow: auto
-  .feedback, .no-feedback, .error-reason
+  .feedback, .no-feedback, .error-reason, #alerts
     margin: 5px
     margin-top: 30px
+    margin-left: 5px
+    margin-right: 5px
+
+  #alerts
+    .alert
+      margin-bottom: 0px
+      &.top-right
+        float: right
+        margin-left: 10px
+
 
 .editor-full
   .editor

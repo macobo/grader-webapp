@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('graderApp', ['ui.bootstrap', 'ui.router', 'ngAnimate', 'chieffancypants.loadingBar'])
+angular.module('graderApp', [
+    'ui.bootstrap', 'ui.router', 'ngAnimate', 'chieffancypants.loadingBar',
+    'mgcrea.ngStrap.modal', 'mgcrea.ngStrap.alert'
+  ])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('list', {
