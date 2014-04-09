@@ -117,7 +117,14 @@ angular.module('graderApp')
       } else {
         current.assets.push({filename: filename, contents: "# "+filename+"\n\n"});
         $scope.setActive(current.assets.length-1);
+        $scope.$broadcast('save');
       }
+    };
+
+    $scope.removeAssetFile = function(index) {
+      current.assets.splice(index, 1);
+      console.log("Removing", index, current);
+        $scope.$emit('save');
     };
 
     $scope.$watch('active_file', function(new_value) {

@@ -51,6 +51,18 @@ body > #container
     opacity: 1
     min-width: 13em
 
+    .file-option
+      display: inline
+      margin: 0px
+      padding: 0px
+      clear: none
+
+      .fa
+        margin-right: -20px
+
+      &:hover
+        color: red
+
 
 .uploadbutton
   background-color: #007a96
@@ -74,14 +86,21 @@ body > #container
 
   .success
     color: #468847
-    &:hover
-      text-decoration: none
   .error
     color: #b94a48
-    cursor: pointer
-  &:hover
-    a
+    //cursor: pointer
+
+  .title
+    &:hover
+      text-decoration: none
       font-weight: bold
+
+
+  .reason
+    margin-top: 5px
+    .show-feedback
+      margin-top: 5px
+      display: block
   .editor
     height: auto !important
 
