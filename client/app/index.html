@@ -64,6 +64,14 @@
                           <i class="fa fa-pencil"></i> Muuda nime
                         </a>
                       </li>
+                      <li>
+                        <a href="" ng-hide="CurrentTester.public" ng-click="broadcast('toggle-public')">
+                          <i class="fa fa-square-o"></i> Tee avalikuks
+                        </a>
+                        <a href="" ng-show="CurrentTester.public" ng-click="broadcast('toggle-public')">
+                          <i class="fa fa-check-square-o"></i> Peida
+                        </a>
+                      </li>
                     </ul>
                   </li>
                   <li class="icons">

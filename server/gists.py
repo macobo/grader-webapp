@@ -19,7 +19,7 @@ def free_name(collection = None):
 @dump_json
 def list_gists():
     gists = db.db.gists
-    return {"results" : list(gists.find())}
+    return {"results" : list(gists.find({"post.public": True}))}
 
 @app.route('/api/gists/<name>', methods=['GET'])
 @dump_json

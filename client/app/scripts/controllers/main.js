@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('graderApp')
-  .controller('GlobalCtrl', function($scope, $state, $stateParams) {
+  .controller('GlobalCtrl', function($scope, $state, $stateParams, CurrentTester) {
     $scope.$state = $state;
     $scope.currentState = $state.current;
     $scope.$stateParams = $stateParams
@@ -9,6 +9,8 @@ angular.module('graderApp')
     $scope.broadcast = function() {
       $scope.$broadcast.apply($scope, arguments);
     };
+
+    $scope.CurrentTester = CurrentTester;
   })
   .controller('MainCtrl', function ($scope, $state, $stateParams, feedbackService, gist, current) {
     $scope.current = current;
@@ -43,6 +45,9 @@ angular.module('graderApp')
     };
 
     $scope.save = function(name) {
+      if (!name) {
+        name = $scope.gist_name;
+      }
       gist
         .save(current, name)
         .then(result_redirect);
@@ -68,6 +73,10 @@ angular.module('graderApp')
       $scope.postSolution();
     });
     $scope.$on('rename', $scope.rename );
+    $scope.$on('toggle-public', function() {
+      current.public = !current.public;
+      $scope.save();
+    });
   })
 
 

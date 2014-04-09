@@ -35,7 +35,6 @@ angular.module('graderApp', ['ui.bootstrap', 'ui.router', 'ngAnimate', 'chieffan
           current: function($stateParams, gist, CurrentTester) {
             var name = $stateParams.gistName;
             return gist.load(name).then(function(gistInfo) {
-              //var deferred = $q.defer();
               return CurrentTester.setCurrent(gistInfo);
             });
           }

@@ -91,15 +91,17 @@ angular.module('graderApp')
     var current = {
       tester_code: '',
       solution_code: '',
-      assets: []
+      assets: [],
+      public: false,
     };
     current.setCurrent = function(gistInfo) {
       var post = {};
       if (gistInfo && gistInfo.post) 
-        post = gistInfo.post;
+        post = _.clone(gistInfo.post);
       current.tester_code = post.tester_code || '';
       current.solution_code = post.solution_code || '';
       current.assets = post.assets || [];
+      current.public = !!post.public; // default - false
       return current;
     };
 
