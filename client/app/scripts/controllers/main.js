@@ -14,8 +14,7 @@ angular.module('graderApp')
   })
   .controller('MainCtrl', function ($scope, $state, $stateParams, feedbackService, gist, current, $alert) {
     var noTests = $alert({
-      title: 'Testimiseks kliki',
-      content: '<i class="fa fa-arrow-circle-right"></i> peal ülal ',
+      content: 'Testimiseks kliki <i class="fa fa-arrow-circle-right"></i> peal ülal ',
       placement: 'top', type: 'info', show: true,
       container: '#alerts'
     });
@@ -44,9 +43,9 @@ angular.module('graderApp')
             console.error(reason);
 
             $alert({
-              title: 'Lahenduse esitamine ebaõnnestus',
+              title: 'Lahenduse esitamine ebaõnnestus:',
               content: reason,
-              placement: 'top', type: 'info', show: true,
+              placement: 'top', type: 'danger', show: true,
               container: '#alerts'
             });
           });
