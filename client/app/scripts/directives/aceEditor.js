@@ -38,11 +38,18 @@ angular.module('graderApp')
 
         editor.on('change', function (instance) {
           var newValue = instance.getValue();
-          scope.model = newValue;
+          if (newValue !== scope.model) {
+            scope.model = newValue;
+            if(!scope.$$phase) {
+              scope.$apply();
+            }
+          }
         });
 
         scope.$watch('model', function(newValue) {
-          editor.getDoc().setValue(newValue);
+          var inEditor = editor.getDoc().getValue();
+          if (newValue !== inEditor)
+            editor.getDoc().setValue(newValue);
         });
       }
     };

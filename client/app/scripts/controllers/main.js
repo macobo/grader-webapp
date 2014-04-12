@@ -108,7 +108,7 @@ angular.module('graderApp')
   })
 
 
-  .controller('AssetsCtrl', function($scope, current){
+  .controller('AssetsCtrl', function($scope, current) {
     $scope.setActive = function(index) {
       console.debug("Setting active file to be", index)
       $scope.active_index = index;
@@ -152,7 +152,7 @@ angular.module('graderApp')
 
     $scope.$watch('active_file', function(new_value) {
       var contents = new_value.contents;
-      console.debug("Contents changed", [$scope.active_index, contents]);
+      //console.debug("Contents changed", [$scope.active_index, contents]);
       if ($scope.active_index == -1)
         current.solution_code = contents;
       else

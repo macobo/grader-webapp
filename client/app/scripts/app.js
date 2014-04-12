@@ -24,11 +24,19 @@ angular.module('graderApp', [
       })
       .state('gist.new', {
         url: '/',
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
         hasEditor: true,
         resolve: {
           current: function(CurrentTester) { return CurrentTester.setCurrent(); }
+        },
+        views: {
+          "": {
+            templateUrl: 'views/main.html',
+            controller: 'MainCtrl',
+          },
+          "solution_files@gist.new": {
+            templateUrl: 'views/solution_files.html',
+            controller: 'AssetsCtrl'
+          }
         }
       })
       .state('gist.edit', {
